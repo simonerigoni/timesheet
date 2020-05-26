@@ -1,2 +1,3 @@
-# timesheet
-Timesheet management
+# Timesheet
+
+Timesheet management Django application
