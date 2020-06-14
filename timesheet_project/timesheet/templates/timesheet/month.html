@@ -1,0 +1,17 @@
+{% extends "home/home.html" %}
+{% block content %}
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Timesheet</h1>
+    </div>
+  </section> 
+  <div class="clearfix">
+    <a class="btn btn-info left" href="{% url 'month' %}?{{ prev_month }}">Previous Month</a>
+    <a class="btn btn-info center" href="{% url 'year' %}?year={{ year }}">Back to Year</a>
+    <a class="btn btn-info right" href="{% url 'month' %}?{{ next_month }}">Next Month</a>
+  </div>
+  <div>
+    {{ calendar }}
+  </div>
+  <br>
+{% endblock %}

@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.pyc
+/timesheet_project/timesheet/migrations/0007_auto_20200614_1228.py
+/timesheet_project/timesheet/migrations/0006_auto_20200614_1158.py
+/timesheet_project/timesheet/migrations/0005_auto_20200611_1834.py
+/timesheet_project/timesheet/migrations/0004_auto_20200611_1724.py
+/timesheet_project/timesheet/migrations/0003_auto_20200611_1535.py
+/timesheet_project/timesheet/migrations/0002_auto_20200611_1532.py
+/timesheet_project/timesheet/migrations/0001_initial.py
+/.vs

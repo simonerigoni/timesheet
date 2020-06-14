@@ -1,0 +1,71 @@
+{% extends 'home/home.html' %}
+{% block content %}
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Timesheet</h1>
+    </div>
+  </section> 
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="text-left">
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>Massive edit</h5>
+            {% if submitted == 1 %}
+              <p class="alert alert-success">Edit submitted successfully</p>
+            {% elif submitted == 2 %}
+              <p class="alert alert-danger">Error</p>
+            {% endif %}
+            <form method="post" action="" role="form" novalidate>
+              {% csrf_token %}
+                {% if type_day == 0 %}
+                  <!-- https://bootstrapious.com/p/bootstrap-multiselect-dropdown -->
+                  <h5>Day Type</h5>
+                  <select name="type-input-filter" data-style="bg-white rounded-pill px-2 py-2 shadow-sm" class="selectpicker w-100" multiple>
+                    <option>Timesheet Day</option>
+                    <option>Working Day</option>
+                  </select>
+                  <br>
+                  <br>
+                  <input type="submit" name="type-button-filter" class="btn btn-info btn-send" value="Filter">
+                  <br>
+                {% else %}
+                    <h5>Data Rage</h5>
+                    <div class="input-group input-daterange">
+                      <input name="start-date-input" type="text" class="form-control" value="{{init_start_date_input}}">
+                      <div class="input-group-addon"> to </div>
+                      <input name="end-date-input" type="text" class="form-control" value="{{init_end_date_input}}">
+                    </div>
+                    <br>
+                    {% if type_day == 1 %}
+                      <h5>Timesheet Day Type</h5>
+                      <select name="timesheet-day-input" data-style="bg-white rounded-pill px-2 py-2 shadow-sm" class="selectpicker w-100" multiple>
+                        <option>Working Day</option>
+                        <option>Non Working Day</option>
+                      </select>
+                    {% elif type_day == 2 %}
+                      <h5>Working Day Type</h5>
+                      <select name="working-day-input" data-style="bg-white rounded-pill px-2 py-2 shadow-sm" class="selectpicker w-100" multiple>
+                        <option>Working Hours</option>
+                        <option>Vacation Hours</option>
+                        <option>PAR Hours</option>
+                        <option>CIGO Hours</option>
+                        <option>Mild Illness Hours</option>
+                        <option>Sick Leave Hours</option>
+                        <option>Generic Permit Hours</option>
+                        <option>Smartworking Hours</option>
+                      </select>
+                    {% endif %}
+                    <br>
+                    <br>
+                    <input type="submit" name="type-button-filter" class="btn btn-info btn-send" value="Submit">
+                {% endif %}
+                <br><br>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

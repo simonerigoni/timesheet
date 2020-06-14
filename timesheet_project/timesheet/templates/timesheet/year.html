@@ -1,0 +1,17 @@
+{% extends "home/home.html" %}
+{% block content %}
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Timesheet</h1>
+    </div>
+  </section> 
+  <div class="clearfix">
+    <a class="btn btn-info left" href="{% url 'year' %}?{{ prev_year }}">Previous Year</a>
+    <a class="btn btn-info center" href="{% url 'home' %}">Back to Home</a>
+    <a class="btn btn-info right" href="{% url 'year' %}?{{ next_year }}">Next Year</a>
+  </div>
+  <div>
+    {{ calendar }}
+  </div>
+  <br>
+{% endblock %}

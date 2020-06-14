@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Simone Rigoni">
+    <meta name="generator" content="Jekyll v3.8.6">
+
+    <title>Timesheet</title>
+    {% load static %}
+    
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+
+    <!-- Favicons -->
+    <!-- <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#563d7c"> -->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'timesheet/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'timesheet/css/bootstrap-select.min.css' %}">
+  </head>
+  <body>
+    <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center"><h3><strong>Timesheet</strong></h3></a>
+          <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center"><h5><strong>Home</strong></h5></a>
+          <!-- <a href="{'% url 'hello_world' %}" class="navbar-brand d-flex align-items-center"><h5><strong>Hello World</strong></h5></a> -->
+
+        </div>
+      </div>
+    </header> 
+    <main role="main">
+      {% block content %}
+			{% endblock %}
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+          This website was built using <a href="https://www.djangoproject.com/">Django</a>, <a href="https://plotly.com/dash/">Dash</a> and <a href="https://getbootstrap.com/">Bootstrap</a>. Check them out! They have awesome templates<br>
+        </p>
+      </div>
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'home/jquery-3.5.1.slim.min.js' %}"></script>
+    <script src="{% static 'home/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'timesheet/js/Chart.min.js' %}"></script>
+    <script src="{% static 'timesheet/js/bootstrap-select.min.js' %}"></script>
+  </body>
+</html>

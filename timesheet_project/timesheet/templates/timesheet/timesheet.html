@@ -1,0 +1,174 @@
+{% extends "home/home.html" %}
+{% block content %}
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1>Timesheet</h1>
+    </div>
+  </section> 
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="text-left">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Years</h3>
+            {% for year in years %}
+              <!-- <a href="'{% url 'month' %}?month={{ year }}-1">{{ year }}</a><br> -->
+              <a href="{% url 'year' %}?year={{ year }}">{{ year }}</a><br>
+            {% endfor %}
+          </div>
+          <div class="col-sm-6">
+            <form method="post" action="" role="form" novalidate>
+              {% csrf_token %}
+              <input type="number" name="year-input-add-delete">
+              <input type="submit" name="year-button-add" class="btn btn-info btn-send" value="Add Year">
+              <input type="submit" name="year-button-delete" class="btn btn-info btn-send" value="Delete Year">
+            </form>
+            <br>
+            <h5><a href="{% url 'massive_edit' %}">Massive edit</a></h5><br>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-2">
+            <h5>Report</h5>
+            <form method="post" action="" role="form" novalidate>
+              {% csrf_token %}
+				        <!-- https://bootstrapious.com/p/bootstrap-multiselect-dropdown -->
+                <!-- Multiselect dropdown -->
+                <select name="year-input-filter" data-style="bg-white rounded-pill px-2 py-2 shadow-sm" class="selectpicker w-100" multiple>
+                  {% for year in years %}
+                    <option>{{ year }}</option>
+                  {% endfor %}
+                </select><!-- End -->
+                <br><br>
+              <input type="submit" name="year-button-filter" class="btn btn-info btn-send" value="Filter">
+            </form>
+            <br>
+            <h6>Filtered Years:</h6>
+            {% for year in filter_year %}
+              <h7>{{ year }}<h7>
+            {% endfor %}
+          </div>
+          <div class="col-sm-5">         
+            <table class="table table-bordered">
+              <tr>
+                <th>Day Type</th>
+                <th>Days</th>
+                <th>Hours</th>
+              </tr>
+              {% for key, value in day_data.items %} 
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ value.0 }}</td>
+                  <td>{{ value.1 }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="col-sm-5">
+            <table class="table table-bordered">
+              <tr>
+                <th>Working Hours Type</th>
+                <th>Hours</th>
+              </tr>
+              {% for key, value in hour_data.items %} 
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ value }}</td>
+                </tr>    
+              {% endfor %}          
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>Working Hours Distribution</h5>
+            <div id="container" style="width: 75%;">
+              <canvas id="pie-chart"></canvas>
+            </div>
+
+            <script type="text/javascript">
+              var pie_chart_config = {
+                type: 'pie',
+                data: {
+                  datasets: [{
+                    data: {{ hour_data_data|safe }},
+                    backgroundColor: [
+                      'LightSalmon', 'LightPink', 'LightGreen', 'MediumAquaMarine', 'LightYellow', 'LightSkyBlue', 'Orchid', 'Peru', 'PeachPuff'
+                    ],
+                    label: 'Working Hours Distribution'
+                  }],
+                  labels: {{ hour_data_labels|safe }}
+                },
+                options: {
+                  responsive: true
+                }
+              };
+
+              // window.onload = function() {
+              //   var ctx = document.getElementById('pie-chart').getContext('2d');
+              //   window.myPie = new Chart(ctx, pie_chart_config);
+              // };
+            </script>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <h5>Paycheck</h5>
+              <table class="table table-bordered">
+                <tr>
+                  <th>Month</th>
+                  <th>Gross Salary</th>
+                  <th>Net Salary</th>
+                  <th>Difference</th>
+                </tr>
+                {% for key, value in paycheck_data.items %} 
+                  <tr>
+                    {% if value.0 == 0  %}
+                      <td><a href="/paycheck/edit/{{ key }}">{{ value.1 }}</a></td>
+                    {% else %}
+                      <td>{{ key }}</td>
+                    {% endif %}
+                    <td>{{ value.2 }}</td>
+                    <td>{{ value.3 }}</td>
+                    <td>{{ value.4 }}</td>
+                  </tr>    
+                {% endfor %}          
+              </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <h5>Net Paycheck Monthly Trend</h5>
+            <div id="container" style="width: 75%;">
+              <canvas id="bar-chart"></canvas>
+            </div>
+
+            <script type="text/javascript">
+              var bar_chart_config = {
+                type: 'bar',
+                data: {
+                  datasets: [{
+                    data: {{ paycheck_data_data|safe }},
+                    backgroundColor: 'DarkSlateBlue',
+                    label: 'Net Paycheck Monthly Trend'
+                  }],
+                  labels: {{ paycheck_data_labels|safe }}
+                },
+                options: {
+                  responsive: true
+                }
+              };
+
+              window.onload = function() {
+                window.myPie = new Chart(document.getElementById('pie-chart').getContext('2d'), pie_chart_config);
+                window.myBar = new Chart(document.getElementById('bar-chart').getContext('2d'), bar_chart_config);
+              };
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+{% endblock %}
