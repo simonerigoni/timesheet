@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paychecks. The motivation for this project came from tha fact that I just wanted to get rid of a bunch of Excel spreadsheets I was using to do this tasks
+Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paychecks. The motivation for this project came from the fact that I just wanted to get rid of a bunch of Excel spreadsheets I was using to do this tasks
 
 The current configuration is suited for my needs regarding the types of working hours provided by the Italian legislation e.g. [CIGO](https://it.wikipedia.org/wiki/Cassa_integrazione_guadagni), PAR, [Vacation](https://it.wikipedia.org/wiki/Ferie) ecc.
 
@@ -18,7 +18,7 @@ Hours Type:
 * CIGO Hours - CIG
 * Mild Illness Hours - IND
 * Sick Leave Hours - SIC
-* Generic Permit Hours - GPH
+* Generic Permit Hours - GPH (e.g. Blood donation)
 * Smartworking Hours - SMA
 
 Monthly Paycheck 
