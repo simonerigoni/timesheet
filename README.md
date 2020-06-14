@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paycheks. The motivation for this project came from tha fact I just wanted to get rid of a bunch of Excel spreadsheets I was  using to do this tasks
+Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paychecks. The motivation for this project came from tha fact that I just wanted to get rid of a bunch of Excel spreadsheets I was using to do this tasks
 
-The current configuration is suited for my needs regarding the types of working hours are provided by the Italian legislation e.g. [CIGO](https://it.wikipedia.org/wiki/Cassa_integrazione_guadagni), PAR, [Vacation](https://it.wikipedia.org/wiki/Ferie) ecc.
+The current configuration is suited for my needs regarding the types of working hours provided by the Italian legislation e.g. [CIGO](https://it.wikipedia.org/wiki/Cassa_integrazione_guadagni), PAR, [Vacation](https://it.wikipedia.org/wiki/Ferie) ecc.
 
 Day Types:
 * Working Day - WOD
@@ -59,7 +59,7 @@ The django application
 
 ![Home](images/home.JPG)
 
-In the home we have a list of already created Years and we can also Add or Delete a new Year. We can also use a massive edit feature
+In the home we have a list of already created Years and we can also **Add** or **Delete** a new Year. We can also use a **massive edit feature**
 
 ![Report](images/report.JPG)
 
