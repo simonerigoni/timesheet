@@ -67,7 +67,7 @@ In the Report section we can select the Years we want to consider and have a sum
 
 ![Year](images/year.JPG)
 
-When selecting an Year we ha a detailed view of the year in which we can change the Day Type for a given day
+When selecting an Year we can see a detailed view of the year in which we can change the Day Type for a given day
 
 ![Month](images/month.JPG)
 
