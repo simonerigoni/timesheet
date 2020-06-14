@@ -59,7 +59,7 @@ The django application
 
 ![Home](images/home.JPG)
 
-In the home we have a list of already created Years and we can also **Add** or **Delete** a new Year. We can also use a **massive edit feature**
+In the home we have a list of already created Years and we can also **Add** or **Delete** a new Year. We can also use a **massive edit** feature
 
 ![Report](images/report.JPG)
 
