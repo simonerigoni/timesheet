@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paycheks. The motivation for this project came from tha fact I just wanted to get rid of a bunch of Excel spreadsheets I was to do this tasks
+Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paycheks. The motivation for this project came from tha fact I just wanted to get rid of a bunch of Excel spreadsheets I was  using to do this tasks
 
 The current configuration is suited for my needs regarding the types of working hours are provided by the Italian legislation e.g. [CIGO](https://it.wikipedia.org/wiki/Cassa_integrazione_guadagni), PAR, [Vacation](https://it.wikipedia.org/wiki/Ferie) ecc.
 
