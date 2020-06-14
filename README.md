@@ -63,7 +63,7 @@ In the home we have a list of already created Years and we can also **Add** or *
 
 ![Report](images/report.JPG)
 
-In the Report section we can select the Years we want to consider and have a summuary of the Day Type, Working Hours Type and Paychecks
+In the Report section we can select the Years we want to consider and have a summary of the Day Type, Working Hours Type and Paychecks
 
 ![Year](images/year.JPG)
 
