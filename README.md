@@ -23,6 +23,20 @@ Hours Type:
 
 Monthly Paycheck 
 
+Also the working days/non working days are based on Italian legislation:
+* New Year’s Day (Capodanno) – 01/01/2020
+* Epiphany (Epifania) - 06/01/2020
+* Easter Monday (Lunedì di Pasqua) – 13/04/2020
+* Liberation Day (Liberazione dal nazifascismo) - 25/04/2020
+* Labour Day (Festa del lavoro) - 01/05/2020
+* Republic Day (Festa della Repubblica) - 02/06/2020
+* Assumption of Mary (Assunzione di Maria) – 15/08/2020
+* All Saint’s Day (Ognissanti) - 01/11/2020
+* Saint Ambrose Patron of Milan (Sant'Ambrogio Patrono di Milano) - 07/12/2020 (only valid for Milan)
+* Immaculate Conception (Immacolata Concezione) - 08/12/2020
+* Christmas Day (Natale di Gesù) - 25/12/2020
+* St. Stephen’s Day (Santo Stefano) - 26/12/2020
+
 Some dummy data is present in the database `db.sqlite3` that can be used as reference
 
 ## Software and Libraries
