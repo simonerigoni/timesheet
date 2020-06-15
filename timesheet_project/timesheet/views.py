@@ -161,63 +161,70 @@ def timesheet(request):
             #print(request.POST.getlist('year-input-filter'))
             filter_year = [int(y) for y in request.POST.getlist('year-input-filter')]
         else:
-            input_year = int(request.POST['year-input-add-delete'])
-            if 'year-button-delete' in request.POST:
-                timesheetdays = TimesheetDay.objects.filter(date__year = input_year)
-                for timesheetday in timesheetdays:
-                    if timesheetday.get_year() == input_year:
-                        timesheetday.delete()
-                workingdays = WorkingDay.objects.filter(date__year = input_year)
-                for workingday in workingdays:
-                    if workingday.get_year() == input_year:
-                        workingday.delete()
-                paychecks = Paycheck.objects.filter(date__year = input_year)
-                for paycheck in paychecks:
-                    paycheck.delete()
-            elif 'year-button-add' in request.POST:
-                if input_year not in years:
-                    cal = MonthCalendar(input_year)
-                    vacanze = holidays.Italy(years = input_year).items()
-                    vacanze = [data[0] for data in vacanze]
-                    vacanze.append(date(input_year, 12, 7)) #Sant'Ambrogio Patrono di Milano
+            input_year = request.POST.get('year-input-add-delete', 0)
+            if input_year == '':
+                input_year = 0
+            else:
+                input_year = int(input_year)
+            if input_year == 0:
+                pass
+            else:
+                if 'year-button-delete' in request.POST:
+                    timesheetdays = TimesheetDay.objects.filter(date__year = input_year)
+                    for timesheetday in timesheetdays:
+                        if timesheetday.get_year() == input_year:
+                            timesheetday.delete()
+                    workingdays = WorkingDay.objects.filter(date__year = input_year)
+                    for workingday in workingdays:
+                        if workingday.get_year() == input_year:
+                            workingday.delete()
+                    paychecks = Paycheck.objects.filter(date__year = input_year)
+                    for paycheck in paychecks:
+                        paycheck.delete()
+                elif 'year-button-add' in request.POST:
+                    if input_year not in years:
+                        cal = MonthCalendar(input_year)
+                        vacanze = holidays.Italy(years = input_year).items()
+                        vacanze = [data[0] for data in vacanze]
+                        vacanze.append(date(input_year, 12, 7)) #Sant'Ambrogio Patrono di Milano
 
-                    for quarter in (cal.yeardatescalendar(input_year)):
-                        for month in quarter:
-                            for week in month:
-                                for day in week:
-                                    if day.year == input_year:
-                                        timesheetdays = TimesheetDay.objects.all()
-                                        dates = []
-                                        workingday = None
-                                        for timesheetday in timesheetdays:
-                                            dates.append(timesheetday.date)
-                                        dates = list(set(dates))
-                                        if day in dates:
-                                            pass
-                                        else:
-                                            if day in vacanze:
-                                                timesheetday = TimesheetDay(day_type = 'NWD', date = day)
-                                                workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                        for quarter in (cal.yeardatescalendar(input_year)):
+                            for month in quarter:
+                                for week in month:
+                                    for day in week:
+                                        if day.year == input_year:
+                                            timesheetdays = TimesheetDay.objects.all()
+                                            dates = []
+                                            workingday = None
+                                            for timesheetday in timesheetdays:
+                                                dates.append(timesheetday.date)
+                                            dates = list(set(dates))
+                                            if day in dates:
+                                                pass
                                             else:
-                                                if calendar.weekday(day.year, day.month, day.day) == 5 or calendar.weekday(day.year, day.month, day.day) == 6: # Saturdday or Sunday
+                                                if day in vacanze:
                                                     timesheetday = TimesheetDay(day_type = 'NWD', date = day)
                                                     workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
                                                 else:
-                                                    timesheetday = TimesheetDay(day_type = 'WOD', date = day)
-                                                    workingday = WorkingDay(date = day, office_working_hours = 8, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                                                    if calendar.weekday(day.year, day.month, day.day) == 5 or calendar.weekday(day.year, day.month, day.day) == 6: # Saturdday or Sunday
+                                                        timesheetday = TimesheetDay(day_type = 'NWD', date = day)
+                                                        workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                                                    else:
+                                                        timesheetday = TimesheetDay(day_type = 'WOD', date = day)
+                                                        workingday = WorkingDay(date = day, office_working_hours = 8, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
 
-                                            if timesheetday == None:
-                                                pass
-                                            else:
-                                                timesheetday.save()
-                                            if workingday == None:
-                                                pass
-                                            else:
-                                                workingday.save()
+                                                if timesheetday == None:
+                                                    pass
+                                                else:
+                                                    timesheetday.save()
+                                                if workingday == None:
+                                                    pass
+                                                else:
+                                                    workingday.save()
 
-                    for month in range(1, 13):
-                        paycheck = Paycheck(date = datetime(input_year, month, 27))
-                        paycheck.save()
+                        for month in range(1, 13):
+                            paycheck = Paycheck(date = datetime(input_year, month, 27))
+                            paycheck.save()
 
 
     years = get_years_from_timesheetdays()
