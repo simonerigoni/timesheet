@@ -73,6 +73,8 @@ When selecting an Year we can see a detailed view of the year in which we can ch
 
 When selecting a Month we have a detailed calendar view in which we can change the composition of the Working Day
 
+Results are better explained in this [blog post](https://medium.com/@simone.rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee)
+
 ## Licensing and Acknowledgements
 
 Thank you
