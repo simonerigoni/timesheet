@@ -115,20 +115,20 @@ def get_paycheck_data(filter_year):
     sum_gross_salary = 0
     sum_net_salary = 0
     sum_difference_gross_net_salary = 0
+    count = 0
+
     for month in range(1, 13):
         paychecks = Paycheck.objects.filter(date__year__in = filter_year, date__month = month)
         for paycheck in paychecks:
             paycheck_data[paycheck.id] = (0, month, paycheck.gross_salary, paycheck.net_salary, paycheck.difference_gross_net_salary)
-            sum_gross_salary += paycheck.gross_salary
-            sum_net_salary += paycheck.net_salary
-            sum_difference_gross_net_salary += paycheck.difference_gross_net_salary
-    paycheck_data['Total'] = (1, 0, round(sum_gross_salary, 2), round(sum_net_salary, 2), round(sum_difference_gross_net_salary, 2))
+
+    #print(paycheck_data)
 
     if len(filter_year) > 1:
         agg_paycheck_data = dict()
+        #print(paycheck_data.keys())
         for k in paycheck_data.keys():
             _, month, gross, net, diff = paycheck_data[k]
-            #print(month, gross, net, diff)
             if month not in agg_paycheck_data.keys():
                 agg_paycheck_data[month] = (gross, net, diff)
             else:
@@ -136,10 +136,29 @@ def get_paycheck_data(filter_year):
                 agg_paycheck_data[month] = (current[0] + gross, current[1] + net, current[2] + diff)
         #print(agg_paycheck_data)
 
-        paycheck_data = dict()
+        temp_paycheck_data = dict()
         for k in agg_paycheck_data.keys():
             gross, net, diff = agg_paycheck_data[k]
-            paycheck_data[k] = (2, k, round(gross, 2), round(net, 2), round(diff, 2))
+            temp_paycheck_data[k] = (2, k, round(gross, 2), round(net, 2), round(diff, 2))
+        paycheck_data = temp_paycheck_data
+
+    for k in paycheck_data.keys():
+        _, month, gross, net, diff = paycheck_data[k]
+        if (gross + net + diff) == 0:
+            pass
+        else:
+            sum_gross_salary += gross
+            sum_net_salary += net
+            sum_difference_gross_net_salary += diff
+            count += 1
+    paycheck_data['Total'] = (1, 0, round(sum_gross_salary, 2), round(sum_net_salary, 2), round(sum_difference_gross_net_salary, 2))
+    if count == 0:
+        paycheck_data['Average'] = (1, 0, 0, 0, 0)
+    else:
+        paycheck_data['Average'] = (1, 0, round(sum_gross_salary / count, 2), round(sum_net_salary / count, 2), round(sum_difference_gross_net_salary / count, 2))
+
+    #print(paycheck_data)
+
     return paycheck_data
 
 
@@ -246,8 +265,8 @@ def timesheet(request):
         paycheck_data_labels.append(month)
         paycheck_data_data.append(net)
 
-    paycheck_data_labels = paycheck_data_labels[:-1]
-    paycheck_data_data = paycheck_data_data[:-1]
+    paycheck_data_labels = paycheck_data_labels[:-2]
+    paycheck_data_data = paycheck_data_data[:-2]
 
     # massive updats
     # pippos = TimesheetDay.objects.filter(date__year = 2017)
