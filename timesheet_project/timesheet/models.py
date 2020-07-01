@@ -160,6 +160,7 @@ class Paycheck(models.Model):
     date = models.DateField() # models.ForeignKey(TimesheetDay, on_delete = models.CASCADE)
     gross_salary = models.FloatField(default = 0.0, validators = [MinValueValidator(0.0), MaxValueValidator(9999.99)])
     net_salary = models.FloatField(default = 0.0, validators = [MinValueValidator(0.0), MaxValueValidator(9999.99)])
+    payslip = models.FileField(upload_to = 'timesheet/paycheck/payslips/', null = True, blank = True)
     
     @property
     def difference_gross_net_salary(self):

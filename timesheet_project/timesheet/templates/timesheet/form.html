@@ -20,7 +20,7 @@
       {% endfor %}
   {% endif %}
 
-  <form method="post" action="">
+  <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <table class="form form-table">
       {{ form }}

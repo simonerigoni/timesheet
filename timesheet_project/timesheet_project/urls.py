@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 import home.views
 import hello_world.views
@@ -33,3 +35,6 @@ urlpatterns = [
     path('paycheck/edit/<int:paycheck_id>/', timesheet.views.paycheck, name = 'paycheck_edit'),
     path('massive_edit/', timesheet.views.massive_edit, name = 'massive_edit'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

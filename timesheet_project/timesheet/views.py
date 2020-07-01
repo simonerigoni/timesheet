@@ -370,9 +370,11 @@ def paycheck(request, paycheck_id):
     else:
         paycheck = Paycheck()
 
-    form = PaycheckForm(request.POST or None, instance = paycheck)
+    #print(request.FILES)
+    form = PaycheckForm(request.POST or None, request.FILES or None, instance = paycheck)
     if request.POST and form.is_valid():
         form.save()
+        #print(form)
         return HttpResponseRedirect('/')
 
     return render(request, 'timesheet/form.html', {'form': form})
