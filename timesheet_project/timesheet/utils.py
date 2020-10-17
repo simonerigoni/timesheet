@@ -19,6 +19,7 @@ class MonthCalendar(HTMLCalendar):
             , 'SIC' : 'Orchid'
             , 'GPH' : 'Peru'
             , 'SMA' : 'PeachPuff'
+			, 'RWH' : 'Silver'
         }
 		super(MonthCalendar, self).__init__()
 
@@ -74,6 +75,7 @@ class YearCalendar(HTMLCalendar):
             , 'SIC' : 'Orchid'
             , 'GPH' : 'Peru'
             , 'SMA' : 'PeachPuff'
+			, 'RWH' : 'Silver'
         }
 		super(YearCalendar, self).__init__()
 

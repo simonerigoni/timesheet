@@ -51,18 +51,20 @@ class WorkingDay(models.Model):
         ('IND', 'Mild Illness Hours'),
         ('SIC', 'Sick Leave Hours'),
         ('GPH', 'Generic Permit Hours'),
-        ('SMA', 'Smartworking Hours')
+        ('SMA', 'Smartworking Hours'),
+        ('RWH', 'Reduction of Working Hours')
     ]
     date = models.DateField() #models.ForeignKey(TimesheetDay, on_delete = models.CASCADE)
     office_working_hours = models.IntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    extra_time_working_hours = models.IntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    vacation_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    par_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    cigo_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    mild_illness_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    sick_leave_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    generic_permit_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
-    smartworking_hours = models.PositiveIntegerField(default = 8, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    extra_time_working_hours = models.IntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    vacation_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    par_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    cigo_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    mild_illness_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    sick_leave_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    generic_permit_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    smartworking_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
+    reduction_working_hours = models.PositiveIntegerField(default = 0, validators = [MinValueValidator(0), MaxValueValidator(8)])
 
     def get_year(self):
         return self.date.year
@@ -80,9 +82,10 @@ class WorkingDay(models.Model):
         self.sick_leave_hours = 0
         self.generic_permit_hours = 0
         self.smartworking_hours = 0
+        self.reduction_working_hours = 0
 
     def get_sum_hours(self):
-        return self.office_working_hours + self.extra_time_working_hours + self.vacation_hours + self.par_hours + self.cigo_hours + self.mild_illness_hours + self.sick_leave_hours + self.generic_permit_hours + self.smartworking_hours
+        return self.office_working_hours + self.extra_time_working_hours + self.vacation_hours + self.par_hours + self.cigo_hours + self.mild_illness_hours + self.sick_leave_hours + self.generic_permit_hours + self.smartworking_hours + self.reduction_working_hours
     
     def get_max_hours_type(self):
         dict_var = {
@@ -95,6 +98,7 @@ class WorkingDay(models.Model):
             , 'SIC' : self.sick_leave_hours
             , 'GPH' : self.generic_permit_hours
             , 'SMA' : self.smartworking_hours
+            , 'RWH' : self.reduction_working_hours
         }
         max = 0
         max_hours_type = ''
@@ -119,6 +123,7 @@ class WorkingDay(models.Model):
             , 'SIC' : self.sick_leave_hours
             , 'GPH' : self.generic_permit_hours
             , 'SMA' : self.smartworking_hours
+            , 'RWH' : self.reduction_working_hours
         }
         for var in dict_var.keys():
             if dict_var[var] > 0:
@@ -149,6 +154,7 @@ class WorkingDay(models.Model):
     #                                                     - models.F('sick_leave_hours')
     #                                                     - models.F('generic_permit_hours')
     #                                                     - models.F('smartworking_hours')
+    #                                                     - models.F('reduction_working_hours')
     #                                                 )
     #                                             ),
     #                             name = 'workingday_hours_sum_8')

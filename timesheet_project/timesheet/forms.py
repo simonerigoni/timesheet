@@ -45,6 +45,7 @@ class WorkingDayForm(ModelForm):
             + cleaned_data['sick_leave_hours']
             + cleaned_data['generic_permit_hours']
             + cleaned_data['smartworking_hours']
+            + cleaned_data['reduction_working_hours']
         )
     except KeyError:
         pass

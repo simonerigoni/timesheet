@@ -20,6 +20,7 @@ Hours Type:
 * Sick Leave Hours - SIC
 * Generic Permit Hours - GPH (e.g. Blood donation)
 * Smartworking Hours - SMA
+* Reduction of Working Hours - RWH
 
 Monthly Paycheck 
 

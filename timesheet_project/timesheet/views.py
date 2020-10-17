@@ -85,7 +85,8 @@ def get_hour_data(filter_year):
     count_sick_leave_hours = 0
     count_generic_permit_hours = 0
     count_smartworking_hours = 0
-
+    count_reduction_working_hours = 0
+    
     for workingday in workingdays:
         count_office_working_hours += workingday.office_working_hours
         count_extra_time_working_hours += workingday.extra_time_working_hours
@@ -96,6 +97,7 @@ def get_hour_data(filter_year):
         count_sick_leave_hours += workingday.sick_leave_hours
         count_generic_permit_hours += workingday.generic_permit_hours
         count_smartworking_hours += workingday.smartworking_hours
+        count_reduction_working_hours += workingday.reduction_working_hours
     
     hour_data['Office Working Hours'] = count_office_working_hours
     hour_data['Extra Time Working Hours'] = count_extra_time_working_hours
@@ -106,7 +108,8 @@ def get_hour_data(filter_year):
     hour_data['Sick Leave Hours'] = count_sick_leave_hours
     hour_data['Generic Permit Hours'] = count_generic_permit_hours
     hour_data['Smartworking Hours'] = count_smartworking_hours
-    hour_data['Total'] = count_office_working_hours + count_extra_time_working_hours + count_vacation_hours + count_par_hours + count_cigo_hours + count_mild_illness_hours + count_sick_leave_hours + count_generic_permit_hours + count_smartworking_hours
+    hour_data['Reduction of Working Hours'] = count_reduction_working_hours
+    hour_data['Total'] = count_office_working_hours + count_extra_time_working_hours + count_vacation_hours + count_par_hours + count_cigo_hours + count_mild_illness_hours + count_sick_leave_hours + count_generic_permit_hours + count_smartworking_hours + count_reduction_working_hours
     return hour_data
 
 
@@ -223,14 +226,14 @@ def timesheet(request):
                                             else:
                                                 if day in vacanze:
                                                     timesheetday = TimesheetDay(day_type = 'NWD', date = day)
-                                                    workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                                                    workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0, reduction_working_hours = 0)
                                                 else:
                                                     if calendar.weekday(day.year, day.month, day.day) == 5 or calendar.weekday(day.year, day.month, day.day) == 6: # Saturdday or Sunday
                                                         timesheetday = TimesheetDay(day_type = 'NWD', date = day)
-                                                        workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                                                        workingday = WorkingDay(date = day, office_working_hours = 0, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0, reduction_working_hours = 0)
                                                     else:
                                                         timesheetday = TimesheetDay(day_type = 'WOD', date = day)
-                                                        workingday = WorkingDay(date = day, office_working_hours = 8, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0)
+                                                        workingday = WorkingDay(date = day, office_working_hours = 8, extra_time_working_hours = 0, vacation_hours = 0, par_hours = 0, cigo_hours = 0, mild_illness_hours = 0, sick_leave_hours = 0, generic_permit_hours = 0, smartworking_hours = 0, reduction_working_hours = 0)
 
                                                 if timesheetday == None:
                                                     pass
@@ -414,7 +417,7 @@ def massive_edit(request):
                         timesheetday.save()
                         #print(workingday.date)
                     submitted = 1
-                elif ('Working Hours' in request.POST.get('working-day-input', '')) or ('Vacation Hours' in request.POST.get('working-day-input', '')) or ('PAR Hours' in request.POST.get('working-day-input', '')) or ('CIGO Hours' in request.POST.get('working-day-input', '')) or ('Mild Illness Hours' in request.POST.get('working-day-input', '')) or ('Sick Leave Hours' in request.POST.get('working-day-input', '')) or ('Generic Permit Hours' in request.POST.get('working-day-input', '')) or ('Smartworking Hours' in request.POST.get('working-day-input', '')):
+                elif ('Working Hours' in request.POST.get('working-day-input', '')) or ('Vacation Hours' in request.POST.get('working-day-input', '')) or ('PAR Hours' in request.POST.get('working-day-input', '')) or ('CIGO Hours' in request.POST.get('working-day-input', '')) or ('Mild Illness Hours' in request.POST.get('working-day-input', '')) or ('Sick Leave Hours' in request.POST.get('working-day-input', '')) or ('Generic Permit Hours' in request.POST.get('working-day-input', '')) or ('Smartworking Hours' in request.POST.get('working-day-input', '')) or ('Reduction of Working Hours' in request.POST.get('working-day-input', '')):
                     for workingday in workingdays:
                         timesheetday = timesheetdays.filter(date = workingday.date)
                         if len(timesheetday) > 0:
@@ -435,8 +438,10 @@ def massive_edit(request):
                                 workingday.sick_leave_hours = 8
                             elif 'Generic Permit Hours' in request.POST.get('working-day-input', ''):
                                 workingday.generic_permit_hours = 8
-                            else: #'Smartworking Hours' in request.POST.get('working-day-input', ''):
+                            elif 'Smartworking Hours' in request.POST.get('working-day-input', ''):
                                  workingday.smartworking_hours = 8
+                            else: #'Reduction of Working Hours' in request.POST.get('working-day-input', ''):
+                                 workingday.reduction_working_hours = 8
                             workingday.save()
                             #print(workingday.date)
                     submitted = 1
