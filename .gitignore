@@ -11,3 +11,4 @@
 /timesheet_project/timesheet/migrations/0002_auto_20200611_1532.py
 /timesheet_project/timesheet/migrations/0001_initial.py
 /.vs
+*.pdf
