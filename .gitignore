@@ -12,3 +12,7 @@ pyvenv.cfg
 # Ignore the pdf files
 
 *.pdf
+
+# Ignore migrations
+
+timesheet_project/timesheet/migrations/
