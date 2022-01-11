@@ -48,7 +48,7 @@ This project uses Python 3.8.2 and the following libraries:
 
 More informations in `requirements.txt`. To create it I have used `python -m pip freeze > requirements.txt`. To install all Python packages written in the requirements.txt file run `pip install -r requirements.txt`.
 
-The calendar views are based on this awesome [post](https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html) from [www.huiwenteo.com](www.huiwenteo.com)
+The calendar views are based on this awesome [post](https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html) from [www.huiwenteo.com](https://www.huiwenteo.com)
 
 The dropdown is from this [post](https://bootstrapious.com/p/bootstrap-multiselect-dropdown) from [https://bootstrapious.com](https://bootstrapious.com)
 
