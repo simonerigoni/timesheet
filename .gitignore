@@ -4,9 +4,11 @@
 
 # Ignore the venv directories and configuration
 
-Include/
-Lib/
-Scripts/
+bin
+include
+lib
+lib64
+share
 pyvenv.cfg
 
 # Ignore the pdf files
