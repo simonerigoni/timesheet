@@ -1,5 +1,7 @@
 # Timesheet
 
+** Big refactor needed. Code is pretty messy. I'll do it as soon as I have some free time.**
+
 ## Introduction
 
 Timesheet management Django application. The idea is to a have a single app to manage the working hours, plan vacations and keep track of the paychecks. The motivation for this project came from the fact that I just wanted to get rid of a bunch of Excel spreadsheets I was using to do this tasks
