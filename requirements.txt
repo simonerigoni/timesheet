@@ -1,7 +1,7 @@
 asgiref==3.13.0
 convertdate==2.3.2
 Django==5.2.18
-hijri-converter==2.1.2
+hijri-converter==2.3.2.post1
 holidays==0.107
 korean-lunar-calendar==0.4.0
 PyMeeus==0.5.12
