@@ -1,6 +1,6 @@
 asgiref==3.13.0
 convertdate==2.5.1
-Django==5.2.18
+Django==6.1.2
 hijri-converter==2.3.2.post1
 holidays==0.107
 korean-lunar-calendar==0.4.0
