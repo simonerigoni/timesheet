@@ -1,4 +1,4 @@
-asgiref==3.12.1
+asgiref==3.13.0
 convertdate==2.3.2
 Django==5.2.18
 hijri-converter==2.1.2
