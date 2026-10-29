@@ -5,7 +5,7 @@ hijri-converter==2.3.2.post1
 holidays==0.107
 korean-lunar-calendar==0.4.0
 PyMeeus==0.5.12
-python-dateutil==3.0.0
+python-dateutil==2.9.0.post0
 pytz==2026.6
 six==1.17.0
 sqlparse==0.6.0
