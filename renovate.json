@@ -2,5 +2,12 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "Hold python-dateutil below 3: holidays requires python-dateutil<3",
+      "matchPackageNames": ["python-dateutil"],
+      "allowedVersions": "<3"
+    }
   ]
 }
