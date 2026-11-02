@@ -8,4 +8,4 @@ PyMeeus==0.5.12
 python-dateutil==2.9.0.post0
 pytz==2026.6
 six==1.17.0
-sqlparse==0.6.0
+sqlparse==0.6.1
