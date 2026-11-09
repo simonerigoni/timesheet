@@ -18,3 +18,10 @@ pyvenv.cfg
 # Ignore migrations
 
 timesheet_project/timesheet/migrations/
+
+# uv / tooling
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+COVERAGE.md
