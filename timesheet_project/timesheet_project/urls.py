@@ -13,28 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-import home.views
-import hello_world.views
 import timesheet.views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    #path('',  home.views.welcome, name = 'home'),
-    #path('hello_world/',  hello_world.views.hello_world, name = 'hello_world'),
-    path('',  timesheet.views.timesheet, name = 'home'),
-    path('month/',  timesheet.views.MonthView.as_view(), name = 'month'),
-    path('year/',  timesheet.views.YearView.as_view(), name = 'year'),
-    path('timesheetday/edit/<int:timesheetday_id>/', timesheet.views.timesheetday, name = 'timesheetday_edit'),
-    path('workingday/edit/<int:workingday_id>/', timesheet.views.workingday, name = 'workingday_edit'),
-    path('paycheck/edit/<int:paycheck_id>/', timesheet.views.paycheck, name = 'paycheck_edit'),
-    path('massive_edit/', timesheet.views.massive_edit, name = 'massive_edit'),
+    path("admin/", admin.site.urls),
+    # path('',  home.views.welcome, name = 'home'),
+    # path('hello_world/',  hello_world.views.hello_world, name = 'hello_world'),
+    path("", timesheet.views.timesheet, name="home"),
+    path("month/", timesheet.views.MonthView.as_view(), name="month"),
+    path("year/", timesheet.views.YearView.as_view(), name="year"),
+    path(
+        "timesheetday/edit/<int:timesheetday_id>/",
+        timesheet.views.timesheetday,
+        name="timesheetday_edit",
+    ),
+    path(
+        "workingday/edit/<int:workingday_id>/", timesheet.views.workingday, name="workingday_edit"
+    ),
+    path("paycheck/edit/<int:paycheck_id>/", timesheet.views.paycheck, name="paycheck_edit"),
+    path("massive_edit/", timesheet.views.massive_edit, name="massive_edit"),
 ]
 
-urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
