@@ -15,4 +15,4 @@ permissions:
 
 jobs:
   ci:
-    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@v1
+    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@ci/reusable-concurrency-pip-audit-workflow-lint
