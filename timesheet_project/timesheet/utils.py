@@ -1,4 +1,5 @@
 from calendar import Calendar, HTMLCalendar
+
 from .models import TimesheetDay, WorkingDay
 
 
@@ -20,7 +21,7 @@ class MonthCalendar(HTMLCalendar):
             "SMA": "PeachPuff",
             "RWH": "Silver",
         }
-        super(MonthCalendar, self).__init__()
+        super().__init__()
 
     def format_day(self, day, timesheetdays, workingdays):
         timesheetday = timesheetdays.filter(date__day=day)
@@ -43,7 +44,7 @@ class MonthCalendar(HTMLCalendar):
 
     def format_week(self, the_week, timesheetdays, workingdays):
         week = ""
-        for d, weekday in the_week:
+        for d, _weekday in the_week:
             week += self.format_day(d, timesheetdays, workingdays)
         return f"<tr> {week} </tr>"
 
@@ -76,7 +77,7 @@ class YearCalendar(HTMLCalendar):
             "SMA": "PeachPuff",
             "RWH": "Silver",
         }
-        super(YearCalendar, self).__init__()
+        super().__init__()
 
     def format_day(self, day, timesheetdays, workingdays):
         timesheetday = timesheetdays.filter(date__day=day)
@@ -96,11 +97,7 @@ class YearCalendar(HTMLCalendar):
         return f'<td style="background-color:{colore}"><span class="date"><h6>{timesheetday.get_html_url(human_readable=False)}</h6><h6>{workingday.get_max_hours_type()[0]} {workingday.get_max_hours_type()[1]}</h6></span></td>'
 
     def format_month(self, the_month, timesheetdays, workingdays):
-        month = (
-            '<tr><td><span class="date"><a href="/month/?month={}-{}">{}</a></span></td>'.format(
-                self.year, the_month, the_month
-            )
-        )
+        month = f'<tr><td><span class="date"><a href="/month/?month={self.year}-{the_month}">{the_month}</a></span></td>'
         c = Calendar()
         count_days_31 = 0
         for d in c.itermonthdays(self.year, the_month):
@@ -109,7 +106,7 @@ class YearCalendar(HTMLCalendar):
             else:
                 count_days_31 += 1
                 month += self.format_day(d, timesheetdays, workingdays)
-        for i in range(31 - count_days_31):
+        for _i in range(31 - count_days_31):
             month += '<td><span class="date"></span></td>'
         return f"{month}</tr>"
 

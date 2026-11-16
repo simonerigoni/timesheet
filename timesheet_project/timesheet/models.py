@@ -1,5 +1,5 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 
 # Create your models here.
@@ -158,9 +158,9 @@ class WorkingDay(models.Model):
         }
         for var in dict_var.keys():
             if dict_var[var] > 0:
-                stringa += "{} {} + ".format(dict_var[var], var)
+                stringa += f"{dict_var[var]} {var} + "
 
-        stringa = stringa.strip(" + ")
+        stringa = stringa.removesuffix(" + ")
         return stringa
 
     def get_human_readable_hour_type(self, hour_type):

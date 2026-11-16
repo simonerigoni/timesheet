@@ -1,16 +1,16 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
-from django.views import generic
-from django.utils.safestring import mark_safe
 import calendar
-from datetime import datetime, timedelta, date
-
-from .models import TimesheetDay, WorkingDay, Paycheck
-from .utils import MonthCalendar, YearCalendar
-from .forms import TimesheetDayForm, WorkingDayForm, PaycheckForm
+import json
+from datetime import date, datetime, timedelta
 
 import holidays
-import json
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.utils.safestring import mark_safe
+from django.views import generic
+
+from .forms import PaycheckForm, TimesheetDayForm, WorkingDayForm
+from .models import Paycheck, TimesheetDay, WorkingDay
+from .utils import MonthCalendar, YearCalendar
 
 
 def get_date(req):
