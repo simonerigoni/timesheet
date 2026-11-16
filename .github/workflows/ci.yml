@@ -15,4 +15,4 @@ permissions:
 
 jobs:
   ci:
-    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@v1
+    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@e81134b361113bbab350b76b57110280cf7d387f # v1
