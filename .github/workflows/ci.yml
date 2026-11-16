@@ -5,14 +5,16 @@ on:
     branches: [master, main]
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "51 6 * * 1"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 permissions:
   contents: read
 
 jobs:
   ci:
-    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@e81134b361113bbab350b76b57110280cf7d387f # v1
+    uses: simonerigoni/github/.github/workflows/python-uv-ci.yml@b40071710b2343ed80815f6ddefce8d1e32c9718 # v1.3
