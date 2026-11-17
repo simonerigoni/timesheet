@@ -16,7 +16,6 @@ dependencies = [
 
 
 [project.urls]
-Homepage = "https://github.com/simonerigoni/timesheet"
 Repository = "https://github.com/simonerigoni/timesheet"
 Medium = "https://medium.com/@simone-rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee"
 
