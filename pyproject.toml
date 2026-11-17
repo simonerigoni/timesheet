@@ -21,6 +21,7 @@ Medium = "https://medium.com/@simone-rigoni01/just-another-boring-timesheet-djan
 
 [dependency-groups]
 dev = [
+    "django-types>=0.22.0",
     "pyright>=1.1.408",
     "pytest-cov>=7.1.0",
     "pytest-django>=4.12.0",
@@ -36,10 +37,11 @@ extend-exclude = ["timesheet_project/*/migrations"]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
 
 [tool.pyright]
-# Django model/descriptor typing still needs a dedicated stubs pass (django-stubs
-# alone left 50+ false positives). Exclude the app from pyright until then;
-# ruff + pytest still cover the tree. CI runs `pyright .`, which honors exclude.
-exclude = [".venv", "timesheet_project"]
+# Type-check the Django app with django-types. Keep migrations out; do not
+# exclude the project package itself.
+include = ["timesheet_project"]
+exclude = [".venv", "**/migrations"]
+extraPaths = ["timesheet_project"]
 venvPath = "."
 venv = ".venv"
 

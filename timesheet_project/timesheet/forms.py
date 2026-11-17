@@ -1,4 +1,6 @@
-from django.forms import DateInput, ModelForm
+from typing import cast
+
+from django.forms import DateField, DateInput, ModelForm
 
 from .models import Paycheck, TimesheetDay, WorkingDay
 
@@ -15,8 +17,9 @@ class TimesheetDayForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # input_formats parses HTML5 datetime-local input to datetime field
-        self.fields["date"].input_formats = ("%Y-%m-%d",)
-        self.fields["date"].widget.attrs["readonly"] = True
+        date_field = cast(DateField, self.fields["date"])
+        date_field.input_formats = ("%Y-%m-%d",)
+        date_field.widget.attrs["readonly"] = True
 
 
 class WorkingDayForm(ModelForm):
@@ -31,8 +34,9 @@ class WorkingDayForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # input_formats parses HTML5 datetime-local input to datetime field
-        self.fields["date"].input_formats = ("%Y-%m-%d",)
-        self.fields["date"].widget.attrs["readonly"] = True
+        date_field = cast(DateField, self.fields["date"])
+        date_field.input_formats = ("%Y-%m-%d",)
+        date_field.widget.attrs["readonly"] = True
 
     def clean(self):
         cleaned_data = super().clean()
@@ -75,5 +79,6 @@ class PaycheckForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # input_formats parses HTML5 datetime-local input to datetime field
-        self.fields["date"].input_formats = ("%Y-%m-%d",)
-        self.fields["date"].widget.attrs["readonly"] = True
+        date_field = cast(DateField, self.fields["date"])
+        date_field.input_formats = ("%Y-%m-%d",)
+        date_field.widget.attrs["readonly"] = True

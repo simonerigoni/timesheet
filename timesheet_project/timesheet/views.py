@@ -22,7 +22,7 @@ def get_date(req):
             year = int(req)
             return date(year, month=1, day=1)
     else:
-        return datetime.today()
+        return date.today()
 
 
 def prev_month(d):
@@ -424,6 +424,7 @@ class YearView(generic.ListView):
 
 
 def timesheetday(request, timesheetday_id):
+    timesheetday_prev_day_type = None
     if timesheetday_id:
         timesheetday = get_object_or_404(TimesheetDay, pk=timesheetday_id)
         timesheetday_prev_day_type = timesheetday.day_type
@@ -437,16 +438,14 @@ def timesheetday(request, timesheetday_id):
         if timesheetday.day_type == timesheetday_prev_day_type:
             pass
         else:
-            workingday = WorkingDay.objects.filter(date=timesheetday.date)
-            if len(workingday) > 0:
-                workingday = workingday[0]
-
-            if timesheetday.day_type == "WOD":
-                workingday.office_working_hours = 8
-            else:
-                workingday.set_zero_hours()
-            # print(workingday)
-            workingday.save()
+            workingday = WorkingDay.objects.filter(date=timesheetday.date).first()
+            if workingday is not None:
+                if timesheetday.day_type == "WOD":
+                    workingday.office_working_hours = 8
+                else:
+                    workingday.set_zero_hours()
+                # print(workingday)
+                workingday.save()
 
         return HttpResponseRedirect("/year/?year=" + str(timesheetday.get_year()))
 
@@ -508,9 +507,9 @@ def massive_edit(request):
                     "Working Day" in request.POST.get("timesheet-day-input", "")
                 ):
                     for timesheetday in timesheetdays:
-                        workingday = workingdays.filter(date=timesheetday.date)
-                        if len(workingday) > 0:
-                            workingday = workingday[0]
+                        workingday = workingdays.filter(date=timesheetday.date).first()
+                        if workingday is None:
+                            continue
                         if "Non Working Day" in request.POST.get("timesheet-day-input", ""):
                             timesheetday.day_type = "NWD"
                             workingday.set_zero_hours()
@@ -533,9 +532,9 @@ def massive_edit(request):
                     or ("Reduction of Working Hours" in request.POST.get("working-day-input", ""))
                 ):
                     for workingday in workingdays:
-                        timesheetday = timesheetdays.filter(date=workingday.date)
-                        if len(timesheetday) > 0:
-                            timesheetday = timesheetday[0]
+                        timesheetday = timesheetdays.filter(date=workingday.date).first()
+                        if timesheetday is None:
+                            continue
                         if timesheetday.day_type == "WOD":
                             workingday.set_zero_hours()
                             if "Working Hours" in request.POST.get("working-day-input", ""):

@@ -4,7 +4,7 @@ from .models import TimesheetDay, WorkingDay
 
 
 class MonthCalendar(HTMLCalendar):
-    def __init__(self, year=None, month=None):
+    def __init__(self, year: int, month: int = 1):
         self.year = year
         self.month = month
         self.colors = {
@@ -56,12 +56,12 @@ class MonthCalendar(HTMLCalendar):
         cal += f"{self.formatweekheader()}\n"
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f"{self.format_week(week, timesheetdays, workingdays)}\n"
-        cal += "</table"
+        cal += "</table>"
         return cal
 
 
 class YearCalendar(HTMLCalendar):
-    def __init__(self, year=None):
+    def __init__(self, year: int):
         self.year = year
         self.colors = {
             "WOD": "LightCoral",
@@ -119,5 +119,5 @@ class YearCalendar(HTMLCalendar):
             timesheetdays = TimesheetDay.objects.filter(date__year=self.year, date__month=month)
             workingdays = WorkingDay.objects.filter(date__year=self.year, date__month=month)
             cal += f"{self.format_month(month, timesheetdays, workingdays)}\n"
-        cal += "</table"
+        cal += "</table>"
         return cal
