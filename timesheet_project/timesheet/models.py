@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class TimesheetDay(models.Model):
+    id: int
     DAY_TYPES = [("WOD", "Working Day"), ("NWD", "Non Working Day")]
     day_type = models.CharField(max_length=3, choices=DAY_TYPES, default="WOD")
     date = models.DateField()
@@ -42,6 +43,7 @@ class TimesheetDay(models.Model):
 
 
 class WorkingDay(models.Model):
+    id: int
     HOURS_TYPES = [
         ("WOH", "Office Working Hours"),
         ("EWO", "Extra Working Hours"),
@@ -194,6 +196,7 @@ class WorkingDay(models.Model):
 
 
 class Paycheck(models.Model):
+    id: int
     date = models.DateField()  # models.ForeignKey(TimesheetDay, on_delete = models.CASCADE)
     gross_salary = models.FloatField(
         default=0.0, validators=[MinValueValidator(0.0), MaxValueValidator(9999.99)]

@@ -66,4 +66,7 @@ def test_get_date_and_navigation_helpers():
     assert next_month(current) == "month=2020-2"
     assert prev_year(current) == "year=2019"
     assert next_year(current) == "year=2021"
-    assert get_date("").year  # falls back to today
+    today = get_date("")
+    assert isinstance(today, date)
+    assert today == date.today()
+    assert get_date(None) == date.today()

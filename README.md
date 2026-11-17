@@ -50,7 +50,7 @@ This project uses Python 3.15 and the following libraries:
 * [Django](https://www.djangoproject.com/)
 * [holidays](https://pypi.org/project/holidays/)
 
-More informations in `requirements.txt`. To create it I have used `python -m pip freeze > requirements.txt`. To install all Python packages written in the requirements.txt file run `pip install -r requirements.txt`.
+Set up the project with `uv sync` from the project folder. Then run checks with `uv run pre-commit run --all-files` or `uv run pytest`.
 
 The calendar views are based on this awesome [post](https://www.huiwenteo.com/normal/2018/07/24/django-calendar.html) from [www.huiwenteo.com](https://www.huiwenteo.com)
 
@@ -58,7 +58,7 @@ The dropdown is from this [post](https://bootstrapious.com/p/bootstrap-multisele
 
 ## Running the code
 
-To run the application `python manage.py runserver`. The default url to connect to it is http://127.0.0.1:8000/
+To run the application `uv run python manage.py runserver` from the `timesheet_project` folder (or `uv run python timesheet_project/manage.py runserver` from the project root). The default url to connect to it is http://127.0.0.1:8000/
 
 ## Results
 
@@ -80,7 +80,7 @@ When selecting an Year we can see a detailed view of the year in which we can ch
 
 When selecting a Month we have a detailed calendar view in which we can change the composition of the Working Day
 
-Results are better explained in this [blog post](https://medium.com/@simone.rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee)
+Results are better explained in this [blog post](https://medium.com/@simone-rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee)
 
 ## Licensing and Acknowledgements
 
