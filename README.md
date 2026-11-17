@@ -46,7 +46,7 @@ Some dummy data is present in the database `db.sqlite3` that can be used as refe
 
 ## Software and Libraries
 
-This project uses Python 3.8.2 and the following libraries:
+This project uses Python 3.15 and the following libraries:
 * [Django](https://www.djangoproject.com/)
 * [holidays](https://pypi.org/project/holidays/)
 

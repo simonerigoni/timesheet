@@ -15,9 +15,6 @@ pyvenv.cfg
 
 *.pdf
 
-# Ignore migrations
-
-timesheet_project/timesheet/migrations/
 
 # uv / tooling
 .venv/
@@ -25,3 +22,7 @@ timesheet_project/timesheet/migrations/
 .ruff_cache/
 .coverage
 COVERAGE.md
+
+# Pytest-django test database copies
+**/test_db.sqlite3
+**/test_*.sqlite3
