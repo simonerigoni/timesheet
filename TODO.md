@@ -1,12 +1,19 @@
-# To do list 
+# Timesheet
 
-## New ideas
+## TODO
 
+Overview of the status of the tasks of this project.
 
-## To Do
+## Tasks
 
+### To do
 
-## In Progress
+- [ ] None
 
+### In Progress
 
-## Done ✓
+- [ ] None
+
+### Done ✓
+
+- [x] Project initialization
