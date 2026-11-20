@@ -82,6 +82,14 @@ When selecting a Month we have a detailed calendar view in which we can change t
 
 Results are better explained in this [blog post](https://medium.com/@simone-rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee)
 
+## List of activities
+
+In the [TODO.md](TODO.md) file you can find the list of tasks and on going activities.
+
 ## Licensing and Acknowledgements
 
 Thank you
+
+## Outro
+
+I hope this repository was interesting and thank you for taking the time to check it out. On my Medium you can find a more in depth [story](https://medium.com/@simone-rigoni01/just-another-boring-timesheet-django-application-39c59e55a0ee). Let me know if you have any question and if you like the content that I create feel free to [buy me a coffee](https://www.buymeacoffee.com/simonerigoni).
