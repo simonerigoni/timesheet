@@ -84,7 +84,7 @@ Results are better explained in this [blog post](https://medium.com/@simone-rigo
 
 ## List of activities
 
-In the [TODO.md](TODO.md) file you can find the list of tasks and on going activities.
+In the [TODO.md](TODO.md) file you can find the list of tasks and ongoing activities.
 
 ## Licensing and Acknowledgements
 
